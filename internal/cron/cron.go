@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/musicmash/musicmash/internal/db"
-	"github.com/musicmash/musicmash/internal/log"
+	"github.com/musicmash/notify/internal/db"
+	"github.com/musicmash/notify/internal/log"
 )
 
 type cron struct {

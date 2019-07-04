@@ -5,10 +5,10 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/musicmash/musicmash/internal/api/validators"
-	"github.com/musicmash/musicmash/internal/db"
-	"github.com/musicmash/musicmash/internal/log"
-	tasks "github.com/musicmash/musicmash/internal/tasks/subscriptions"
+	"github.com/musicmash/notify/internal/api/validators"
+	"github.com/musicmash/notify/internal/db"
+	"github.com/musicmash/notify/internal/log"
+	tasks "github.com/musicmash/notify/internal/tasks/subscriptions"
 	"github.com/pkg/errors"
 )
 

@@ -3,7 +3,7 @@ package db
 import (
 	"time"
 
-	"github.com/musicmash/musicmash/internal/log"
+	"github.com/musicmash/notify/internal/log"
 	"github.com/pkg/errors"
 )
 

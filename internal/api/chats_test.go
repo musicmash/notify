@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/musicmash/musicmash/internal/db"
-	"github.com/musicmash/musicmash/internal/testutil"
+	"github.com/musicmash/notify/internal/db"
+	"github.com/musicmash/notify/internal/testutil"
 	"github.com/stretchr/testify/assert"
 )
 

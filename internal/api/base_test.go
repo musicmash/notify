@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/musicmash/musicmash/internal/config"
-	"github.com/musicmash/musicmash/internal/db"
-	"github.com/musicmash/musicmash/internal/testutil"
+	"github.com/musicmash/notify/internal/config"
+	"github.com/musicmash/notify/internal/db"
+	"github.com/musicmash/notify/internal/testutil"
 )
 
 var (

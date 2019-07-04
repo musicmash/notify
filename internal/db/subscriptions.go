@@ -1,6 +1,6 @@
 package db
 
-import "github.com/musicmash/musicmash/internal/log"
+import "github.com/musicmash/notify/internal/log"
 
 type Subscription struct {
 	ID         int64  `json:"-" gorm:"primary_key"`

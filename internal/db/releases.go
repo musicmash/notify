@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/musicmash/musicmash/internal/config"
-	"github.com/musicmash/musicmash/internal/log"
+	"github.com/musicmash/notify/internal/config"
+	"github.com/musicmash/notify/internal/log"
 )
 
 type ReleaseStore struct {

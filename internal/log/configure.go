@@ -3,7 +3,7 @@ package log
 import (
 	"os"
 
-	"github.com/musicmash/musicmash/internal/config"
+	"github.com/musicmash/notify/internal/config"
 	"github.com/rifflock/lfshook"
 	"github.com/sirupsen/logrus"
 )

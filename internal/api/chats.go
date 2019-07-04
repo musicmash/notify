@@ -5,9 +5,9 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/musicmash/musicmash/internal/api/validators"
-	"github.com/musicmash/musicmash/internal/db"
-	"github.com/musicmash/musicmash/internal/log"
+	"github.com/musicmash/notify/internal/api/validators"
+	"github.com/musicmash/notify/internal/db"
+	"github.com/musicmash/notify/internal/log"
 )
 
 func addUserChat(w http.ResponseWriter, r *http.Request) {

@@ -1,9 +1,9 @@
 package notifier
 
 import (
-	"github.com/musicmash/musicmash/internal/db"
-	"github.com/musicmash/musicmash/internal/log"
-	"github.com/musicmash/musicmash/internal/notifier/telegram"
+	"github.com/musicmash/notify/internal/db"
+	"github.com/musicmash/notify/internal/log"
+	"github.com/musicmash/notify/internal/notifier/telegram"
 	"github.com/pkg/errors"
 )
 

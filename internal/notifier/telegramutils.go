@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/musicmash/musicmash/internal/config"
-	"github.com/musicmash/musicmash/internal/db"
-	"github.com/musicmash/musicmash/internal/log"
+	"github.com/musicmash/notify/internal/config"
+	"github.com/musicmash/notify/internal/db"
+	"github.com/musicmash/notify/internal/log"
 	tgbotapi "gopkg.in/telegram-bot-api.v4"
 )
 

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/musicmash/musicmash/internal/db"
+	"github.com/musicmash/notify/internal/db"
 	"github.com/stretchr/testify/assert"
 )
 
