@@ -3,9 +3,7 @@ package db
 import "time"
 
 const (
-	ActionFetch   = "fetch"
-	ActionReFetch = "refetch"
-	ActionNotify  = "notify"
+	ActionNotify = "notify"
 )
 
 type LastAction struct {

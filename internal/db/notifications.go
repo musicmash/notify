@@ -2,9 +2,6 @@ package db
 
 import (
 	"time"
-
-	"github.com/musicmash/notify/internal/log"
-	"github.com/pkg/errors"
 )
 
 type Notification struct {
@@ -17,8 +14,6 @@ type Notification struct {
 type NotificationMgr interface {
 	CreateNotification(notification *Notification) error
 	GetNotificationsForUser(userName string) ([]*Notification, error)
-	MarkReleasesAsDelivered(userName string, releases []*Release)
-	IsUserAlreadyNotified(userName string, release *Release) (bool, error)
 }
 
 func (mgr *AppDatabaseMgr) GetNotificationsForUser(userName string) ([]*Notification, error) {
@@ -31,37 +26,4 @@ func (mgr *AppDatabaseMgr) GetNotificationsForUser(userName string) ([]*Notifica
 
 func (mgr *AppDatabaseMgr) CreateNotification(notification *Notification) error {
 	return mgr.db.Create(&notification).Error
-}
-
-func (mgr *AppDatabaseMgr) IsUserAlreadyNotified(userName string, release *Release) (bool, error) {
-	count := 0
-	query := mgr.db.Table("notifications")
-	const whereCondition = "user_name = ? and release_id = ? and date = ?"
-	err := query.Where(whereCondition, userName, release.ID, time.Now().UTC().Truncate(time.Hour*24)).Count(&count).Error
-	if err != nil {
-		return false, err
-	}
-	return count > 0, nil
-}
-
-func (mgr *AppDatabaseMgr) MarkReleasesAsDelivered(userName string, releases []*Release) {
-	for _, release := range releases {
-		notified, err := mgr.IsUserAlreadyNotified(userName, release)
-		if notified {
-			continue
-		}
-		if err != nil {
-			log.Error(err)
-			continue
-		}
-
-		notification := Notification{
-			UserName:  userName,
-			ReleaseID: release.ID,
-			Date:      time.Now().UTC().Truncate(time.Hour * 24),
-		}
-		if err := mgr.CreateNotification(&notification); err != nil {
-			log.Error(errors.Wrapf(err, "tried to save notification for user '%s' about release_id '%v'", userName, release.ID))
-		}
-	}
 }
