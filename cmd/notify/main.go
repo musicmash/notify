@@ -4,7 +4,6 @@ import (
 	"flag"
 
 	raven "github.com/getsentry/raven-go"
-	"github.com/musicmash/notify/internal/api"
 	"github.com/musicmash/notify/internal/config"
 	"github.com/musicmash/notify/internal/cron"
 	"github.com/musicmash/notify/internal/db"
@@ -37,6 +36,5 @@ func main() {
 	}
 
 	log.Info("Running notify manage..")
-	go cron.Run(db.ActionNotify, config.Config.Notifier.CountOfSkippedHours, notifier.Notify)
-	log.Panic(api.ListenAndServe(config.Config.HTTP.IP, config.Config.HTTP.Port))
+	cron.Run(db.ActionNotify, config.Config.Notifier.CountOfSkippedHours, notifier.Notify)
 }

@@ -11,16 +11,10 @@ import (
 var Config *AppConfig
 
 type AppConfig struct {
-	HTTP     HTTPConfig `yaml:"http"`
-	DB       DBConfig   `yaml:"db"`
-	Log      LogConfig  `yaml:"log"`
-	Notifier Notifier   `yaml:"notifier"`
-	Sentry   Sentry     `yaml:"sentry"`
-}
-
-type HTTPConfig struct {
-	IP   string `yaml:"ip"`
-	Port int    `yaml:"port"`
+	DB       DBConfig  `yaml:"db"`
+	Log      LogConfig `yaml:"log"`
+	Notifier Notifier  `yaml:"notifier"`
+	Sentry   Sentry    `yaml:"sentry"`
 }
 
 type LogConfig struct {

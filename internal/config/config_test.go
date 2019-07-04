@@ -8,9 +8,6 @@ import (
 
 func TestConfig_Load(t *testing.T) {
 	err := Load([]byte(`
-http:
-    port: 9933
-
 db:
     type:  'mysql'
     host:  'mariadb'
@@ -33,9 +30,6 @@ sentry:
 `))
 
 	assert.NoError(t, err)
-
-	assert.Equal(t, "", Config.HTTP.IP)
-	assert.Equal(t, 9933, Config.HTTP.Port)
 
 	assert.Equal(t, "mysql", Config.DB.Type)
 	assert.Equal(t, "mariadb", Config.DB.Host)

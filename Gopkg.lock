@@ -26,17 +26,6 @@
   version = "v0.2.0"
 
 [[projects]]
-  digest = "1:a9fe0f8ff72c388d0128e88ce5f3c27d37dcd0950acd7cdb8323555f12463396"
-  name = "github.com/go-chi/chi"
-  packages = [
-    ".",
-    "middleware",
-  ]
-  pruneopts = "UT"
-  revision = "b5294d10673813fac8558e7f47242bc9e61b4c25"
-  version = "v3.3.3"
-
-[[projects]]
   digest = "1:adea5a94903eb4384abef30f3d878dc9ff6b6b5b0722da25b82e5169216dfb61"
   name = "github.com/go-sql-driver/mysql"
   packages = ["."]
@@ -71,28 +60,6 @@
   pruneopts = "UT"
   revision = "25ecb14adfc7543176f7d85291ec7dba82c6f7e4"
   version = "v1.9.0"
-
-[[projects]]
-  branch = "master"
-  digest = "1:3e6cea12173b216c91c75e0f90f697d11b4092625ccbef37e06595a6183ccd84"
-  name = "github.com/musicmash/musicmash"
-  packages = [
-    "internal/api/validators",
-    "internal/clients/itunes",
-    "internal/clients/itunes/artists",
-    "internal/clients/yandex",
-    "internal/clients/yandex/types",
-    "internal/config",
-    "internal/db",
-    "internal/log",
-    "internal/notifier/telegram",
-    "internal/tasks/subscriptions",
-    "internal/tasks/subscriptions/linkers/apple",
-    "internal/tasks/subscriptions/linkers/yandex",
-    "internal/testutil",
-  ]
-  pruneopts = "UT"
-  revision = "e72652aa2f4c79ab1aeeeb22a048d31341d99fcf"
 
 [[projects]]
   digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
@@ -144,17 +111,6 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:3e4c7966b60df887418bf1b880be9a1e6c36f97ef40491b7bad72d21a4334cd0"
-  name = "go.uber.org/ratelimit"
-  packages = [
-    ".",
-    "internal/clock",
-  ]
-  pruneopts = "UT"
-  revision = "c15da02342779cb6dc027fc95ee2277787698f36"
-
-[[projects]]
-  branch = "master"
   digest = "1:3f3a05ae0b95893d90b9b3b5afdb79a9b3d96e4e36e099d841ae602e4aca0da8"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
@@ -201,18 +157,9 @@
   analyzer-version = 1
   input-imports = [
     "github.com/getsentry/raven-go",
-    "github.com/go-chi/chi",
-    "github.com/go-chi/chi/middleware",
     "github.com/jinzhu/gorm",
     "github.com/jinzhu/gorm/dialects/mysql",
     "github.com/jinzhu/gorm/dialects/sqlite",
-    "github.com/musicmash/musicmash/internal/api/validators",
-    "github.com/musicmash/musicmash/internal/config",
-    "github.com/musicmash/musicmash/internal/db",
-    "github.com/musicmash/musicmash/internal/log",
-    "github.com/musicmash/musicmash/internal/notifier/telegram",
-    "github.com/musicmash/musicmash/internal/tasks/subscriptions",
-    "github.com/musicmash/musicmash/internal/testutil",
     "github.com/pkg/errors",
     "github.com/rifflock/lfshook",
     "github.com/sirupsen/logrus",
