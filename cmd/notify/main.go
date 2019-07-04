@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	configPath := flag.String("config", "/etc/musicmash/musicmash.yaml", "Path to musicmash.yaml config")
+	configPath := flag.String("config", "/etc/musicmash/notify.yaml", "Path to notify.yaml config")
 	flag.Parse()
 
 	if err := config.InitConfig(*configPath); err != nil {
