@@ -73,6 +73,28 @@
   version = "v1.9.0"
 
 [[projects]]
+  branch = "master"
+  digest = "1:3e6cea12173b216c91c75e0f90f697d11b4092625ccbef37e06595a6183ccd84"
+  name = "github.com/musicmash/musicmash"
+  packages = [
+    "internal/api/validators",
+    "internal/clients/itunes",
+    "internal/clients/itunes/artists",
+    "internal/clients/yandex",
+    "internal/clients/yandex/types",
+    "internal/config",
+    "internal/db",
+    "internal/log",
+    "internal/notifier/telegram",
+    "internal/tasks/subscriptions",
+    "internal/tasks/subscriptions/linkers/apple",
+    "internal/tasks/subscriptions/linkers/yandex",
+    "internal/testutil",
+  ]
+  pruneopts = "UT"
+  revision = "e72652aa2f4c79ab1aeeeb22a048d31341d99fcf"
+
+[[projects]]
   digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
   name = "github.com/pkg/errors"
   packages = ["."]
@@ -184,11 +206,17 @@
     "github.com/jinzhu/gorm",
     "github.com/jinzhu/gorm/dialects/mysql",
     "github.com/jinzhu/gorm/dialects/sqlite",
+    "github.com/musicmash/musicmash/internal/api/validators",
+    "github.com/musicmash/musicmash/internal/config",
+    "github.com/musicmash/musicmash/internal/db",
+    "github.com/musicmash/musicmash/internal/log",
+    "github.com/musicmash/musicmash/internal/notifier/telegram",
+    "github.com/musicmash/musicmash/internal/tasks/subscriptions",
+    "github.com/musicmash/musicmash/internal/testutil",
     "github.com/pkg/errors",
     "github.com/rifflock/lfshook",
     "github.com/sirupsen/logrus",
     "github.com/stretchr/testify/assert",
-    "go.uber.org/ratelimit",
     "gopkg.in/telegram-bot-api.v4",
     "gopkg.in/yaml.v2",
   ]
