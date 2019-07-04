@@ -1,0 +1,22 @@
+http:
+    port: 9933
+
+db:
+    type:  'mysql'
+    host:  'mariadb'
+    name:  'notify'
+    login: 'notify'
+    pass:  'notify'
+    log: false
+
+log:
+    level: DEBUG
+    file: 'notify.log'
+
+notifier:
+    count_of_skipped_hours: 8
+    telegram_token: "12340255:BBBZZZJJJJJAAAEEEEE"
+
+sentry:
+  enabled: true
+  key: "https://xxxxx:yyyyy@sentry.io/123456"
