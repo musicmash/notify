@@ -36,7 +36,7 @@ func main() {
 		}
 	}
 
-	log.Info("Running musicmash..")
+	log.Info("Running notify manage..")
 	go cron.Run(db.ActionNotify, config.Config.Notifier.CountOfSkippedHours, notifier.Notify)
 	log.Panic(api.ListenAndServe(config.Config.HTTP.IP, config.Config.HTTP.Port))
 }
