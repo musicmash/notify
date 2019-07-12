@@ -35,6 +35,6 @@ func main() {
 		}
 	}
 
-	log.Info("Running notify manage..")
+	log.Info("Running notify service..")
 	cron.Run(db.ActionNotify, config.Config.Notifier.CountOfSkippedHours, notifier.Notify)
 }
