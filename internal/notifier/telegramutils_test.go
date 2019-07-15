@@ -5,23 +5,23 @@ import (
 	"testing"
 	"time"
 
+	"github.com/musicmash/musicmash/pkg/api/releases"
 	"github.com/musicmash/notify/internal/config"
-	"github.com/musicmash/notify/internal/db"
 	"github.com/musicmash/notify/internal/testutil"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestTelegramUtils_MakeText(t *testing.T) {
 	// arrange
-	release := db.Release{
-		Title:      testutil.ReleaseArchitectsHollyHell,
-		ArtistName: testutil.ArtistArchitects,
-		Released:   time.Now().UTC().Truncate(time.Hour).Add(-time.Hour),
-		Poster:     testutil.PosterSimple,
+	release := releases.Release{
+		StoreName: testutil.StoreApple,
+		Title:     testutil.ReleaseArchitectsHollyHell,
+		Released:  time.Now().UTC().Truncate(time.Hour).Add(-time.Hour),
+		Poster:    testutil.PosterSimple,
 	}
 
 	// action
-	text := makeText(&release)
+	text := makeText(testutil.ArtistArchitects, &release)
 
 	// assert
 	assert.Equal(t, "New album released \n*Architects*\nHolly Hell [‌‌](http://pic.jpeg)", text)
@@ -29,14 +29,12 @@ func TestTelegramUtils_MakeText(t *testing.T) {
 
 func TestTelegramUtils_MakeButtons(t *testing.T) {
 	// arrange
-	release := db.Release{
-		Title:      testutil.ReleaseArchitectsHollyHell,
-		ArtistName: testutil.ArtistArchitects,
-		Released:   time.Now().UTC().Truncate(time.Hour).Add(-time.Hour),
-		Poster:     testutil.PosterSimple,
-		Stores: []*db.ReleaseStore{
-			{StoreName: testutil.StoreApple, StoreID: testutil.StoreIDA},
-		},
+	release := releases.Release{
+		StoreName: testutil.StoreApple,
+		Title:     testutil.ReleaseArchitectsHollyHell,
+		Released:  time.Now().UTC().Truncate(time.Hour).Add(-time.Hour),
+		Poster:    testutil.PosterSimple,
+		StoreID:   testutil.StoreIDA,
 	}
 	config.Config = &config.AppConfig{
 		Stores: map[string]*config.Store{
@@ -62,15 +60,15 @@ func TestTelegramUtils_MakeButtons(t *testing.T) {
 func TestTelegramUtils_MakeText_Announced(t *testing.T) {
 	// arrange
 	released := time.Now().UTC().Truncate(time.Hour).Add(time.Hour * 48)
-	release := db.Release{
-		Title:      testutil.ReleaseArchitectsHollyHell,
-		ArtistName: testutil.ArtistArchitects,
-		Released:   released,
-		Poster:     testutil.PosterSimple,
+	release := releases.Release{
+		StoreName: testutil.StoreApple,
+		Title:     testutil.ReleaseArchitectsHollyHell,
+		Released:  released,
+		Poster:    testutil.PosterSimple,
 	}
 
 	// action
-	text := makeText(&release)
+	text := makeText(testutil.ArtistArchitects, &release)
 
 	// assert
 	wantMessage := fmt.Sprintf("New album announced \n*Architects*\nHolly Hell\nRelease date: %s [‌‌](http://pic.jpeg)", released.Format(time.RFC850))

@@ -20,13 +20,28 @@ log:
     level: DEBUG
     file: 'notify.log'
 
-notifier:
+notify:
     count_of_skipped_hours: 8
     telegram_token: "12340255:BBBZZZJJJJJAAAEEEEE"
 
 sentry:
   enabled: true
   key: "https://xxxxx:yyyyy@sentry.io/123456"
+
+
+stores:
+  itunes:
+    url: https://api.music.apple.com
+    fetch_workers: 25
+    name: "Apple Music"
+    fetch: true
+    meta:
+      region: "us"
+
+
+musicmash: "http://musicmash"
+
+subscriptions: "http://subscriptions"
 `))
 
 	assert.NoError(t, err)
@@ -46,4 +61,15 @@ sentry:
 
 	assert.True(t, Config.Sentry.Enabled)
 	assert.Equal(t, "https://xxxxx:yyyyy@sentry.io/123456", Config.Sentry.Key)
+
+	assert.Equal(t, "https://api.music.apple.com", Config.Stores["itunes"].URL)
+	assert.Equal(t, 25, Config.Stores["itunes"].FetchWorkers)
+	assert.Len(t, Config.Stores["itunes"].Meta, 1)
+	assert.Equal(t, "us", Config.Stores["itunes"].Meta["region"])
+	assert.Equal(t, "Apple Music", Config.Stores["itunes"].Name)
+	assert.True(t, Config.Stores["itunes"].Fetch)
+
+	assert.Equal(t, "http://musicmash", Config.Musicmash)
+	assert.Equal(t, "http://subscriptions", Config.Subscriptions)
+	assert.Equal(t, "http://artists", Config.Artists)
 }

@@ -11,10 +11,14 @@ import (
 var Config *AppConfig
 
 type AppConfig struct {
-	DB       DBConfig  `yaml:"db"`
-	Log      LogConfig `yaml:"log"`
-	Notifier Notifier  `yaml:"notifier"`
-	Sentry   Sentry    `yaml:"sentry"`
+	DB            DBConfig          `yaml:"db"`
+	Log           LogConfig         `yaml:"log"`
+	Notifier      Notifier          `yaml:"notifier"`
+	Sentry        Sentry            `yaml:"sentry"`
+	Musicmash     string            `yaml:"musicmash"`
+	Subscriptions string            `yaml:"subscriptions"`
+	Artists       string            `yaml:"artists"`
+	Stores        map[string]*Store `yaml:"stores"`
 }
 
 type LogConfig struct {
@@ -40,6 +44,18 @@ type Sentry struct {
 	Enabled bool   `yaml:"enabled"`
 	Key     string `yaml:"key"`
 }
+
+type Store struct {
+	URL          string `yaml:"url"`
+	FetchWorkers int    `yaml:"fetch_workers"`
+	Meta         Meta   `yaml:"meta"`
+	ReleaseURL   string `yaml:"release_url"`
+	ArtistURL    string `yaml:"artist_url"`
+	Name         string `yaml:"name"`
+	Fetch        bool   `json:"fetch"`
+}
+
+type Meta map[string]string
 
 func InitConfig(filepath string) error {
 	data, err := ioutil.ReadFile(filepath)

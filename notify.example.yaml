@@ -20,3 +20,19 @@ notifier:
 sentry:
   enabled: true
   key: "https://xxxxx:yyyyy@sentry.io/123456"
+
+stores:
+    itunes:
+        url: https://api.music.apple.com
+        fetch_workers: 25
+        name: "Apple Music"
+        fetch: true
+        meta:
+            region: "us"
+
+
+musicmash: "http://musicmash"
+
+subscriptions: "http://subscriptions"
+
+artists: "http://artists"
