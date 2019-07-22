@@ -13,7 +13,7 @@ type Step interface {
 
 // ArtistID id of artist equals to id from service index
 // ArtistName name of artist equals name from artists service index
-// Subscribers users that must recieve notification
+// Subscribers users that must receive notification
 // Chats array of subscribers chat_ids
 // Releases releases from musicmash service that must be delivered to user
 type Item struct {

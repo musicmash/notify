@@ -23,7 +23,7 @@ type Notifier struct {
 
 func getUniqueArtists(groupedArtists map[int64][]*releases.Release) []int64 {
 	artists := []int64{}
-	for artistID, _ := range groupedArtists {
+	for artistID := range groupedArtists {
 		artists = append(artists, artistID)
 	}
 	return artists

@@ -19,7 +19,7 @@ func removeAt(s []string, index int) []string {
 }
 
 func (c *ChatStep) Do(_ time.Time, items []*Item) ([]*Item, error) {
-	for i, _ := range items {
+	for i := range items {
 		for subscriberID, subscriber := range items[i].Subscribers {
 			chatID, err := db.DbMgr.FindChatByUserName(subscriber)
 			if err != nil {
