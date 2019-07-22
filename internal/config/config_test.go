@@ -8,39 +8,36 @@ import (
 
 func TestConfig_Load(t *testing.T) {
 	err := Load([]byte(`
+---
 db:
-    type:  'mysql'
-    host:  'mariadb'
-    name:  'notify'
-    login: 'notify'
-    pass:  'notify'
-    log: false
+  type:  "mysql"
+  host:  "mariadb"
+  name:  "notify"
+  login: "notify"
+  pass:  "notify"
+  log:   false
 
 log:
-    level: DEBUG
-    file: 'notify.log'
+  level: "DEBUG"
+  file:  "notify.log"
 
-notify:
-    count_of_skipped_hours: 8
-    telegram_token: "12340255:BBBZZZJJJJJAAAEEEEE"
+notifier:
+  count_of_skipped_hours: 8
+  telegram_token: "12340255:BBBZZZJJJJJAAAEEEEE"
 
 sentry:
   enabled: true
-  key: "https://xxxxx:yyyyy@sentry.io/123456"
-
+  key:     "https://xxxxx:yyyyy@sentry.io/123456"
 
 stores:
   itunes:
-    url: https://api.music.apple.com
-    fetch_workers: 25
+    url:  "https://api.music.apple.com"
     name: "Apple Music"
-    fetch: true
     meta:
       region: "us"
 
-
-musicmash: "http://musicmash"
-
+artists:       "http://artists"
+musicmash:     "http://musicmash"
 subscriptions: "http://subscriptions"
 `))
 
@@ -63,13 +60,11 @@ subscriptions: "http://subscriptions"
 	assert.Equal(t, "https://xxxxx:yyyyy@sentry.io/123456", Config.Sentry.Key)
 
 	assert.Equal(t, "https://api.music.apple.com", Config.Stores["itunes"].URL)
-	assert.Equal(t, 25, Config.Stores["itunes"].FetchWorkers)
 	assert.Len(t, Config.Stores["itunes"].Meta, 1)
 	assert.Equal(t, "us", Config.Stores["itunes"].Meta["region"])
 	assert.Equal(t, "Apple Music", Config.Stores["itunes"].Name)
-	assert.True(t, Config.Stores["itunes"].Fetch)
 
+	assert.Equal(t, "http://artists", Config.Artists)
 	assert.Equal(t, "http://musicmash", Config.Musicmash)
 	assert.Equal(t, "http://subscriptions", Config.Subscriptions)
-	assert.Equal(t, "http://artists", Config.Artists)
 }

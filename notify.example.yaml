@@ -1,38 +1,31 @@
-http:
-    port: 9933
-
+---
 db:
-    type:  'mysql'
-    host:  'mariadb'
-    name:  'notify'
-    login: 'notify'
-    pass:  'notify'
-    log: false
+  type:  "mysql"
+  host:  "mariadb"
+  name:  "notify"
+  login: "notify"
+  pass:  "notify"
+  log:   false
 
 log:
-    level: DEBUG
-    file: 'notify.log'
+  level: "DEBUG"
+  file:  "notify.log"
 
 notifier:
-    count_of_skipped_hours: 8
-    telegram_token: "12340255:BBBZZZJJJJJAAAEEEEE"
+  count_of_skipped_hours: 8
+  telegram_token: "12340255:BBBZZZJJJJJAAAEEEEE"
 
 sentry:
   enabled: true
-  key: "https://xxxxx:yyyyy@sentry.io/123456"
+  key:     "https://xxxxx:yyyyy@sentry.io/123456"
 
 stores:
-    itunes:
-        url: https://api.music.apple.com
-        fetch_workers: 25
-        name: "Apple Music"
-        fetch: true
-        meta:
-            region: "us"
+  itunes:
+    url:  "https://api.music.apple.com"
+    name: "Apple Music"
+    meta:
+      region: "us"
 
-
-musicmash: "http://musicmash"
-
+artists:       "http://artists"
+musicmash:     "http://musicmash"
 subscriptions: "http://subscriptions"
-
-artists: "http://artists"
