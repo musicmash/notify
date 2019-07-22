@@ -8,7 +8,6 @@ import (
 	"github.com/musicmash/notify/internal/cron"
 	"github.com/musicmash/notify/internal/db"
 	"github.com/musicmash/notify/internal/log"
-	"github.com/musicmash/notify/internal/notifier"
 	"github.com/musicmash/notify/internal/notifier/telegram"
 	"github.com/pkg/errors"
 )
@@ -36,5 +35,16 @@ func main() {
 	}
 
 	log.Info("Running notify service..")
-	cron.Run(db.ActionNotify, config.Config.Notifier.CountOfSkippedHours, notifier.Notify)
+	cron.Run(db.ActionNotify, config.Config.Notifier.CountOfSkippedHours, func() {
+		last, err := db.DbMgr.GetLastActionDate(db.ActionNotify)
+		if err != nil {
+			log.Error(errors.Wrap(err, "tried to get last_action for notify stage"))
+			return
+		}
+
+		// if fetching exited with error, we shouldn't save last-notify date?
+		if err := makeNotifier().Notify(last.Date); err != nil {
+			log.Error(err)
+		}
+	})
 }
