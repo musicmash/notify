@@ -12,6 +12,5 @@ func makeNotifier() *notifier.Notifier {
 	return notifier.New(
 		mashapi.NewProvider(config.Config.Musicmash, 1),
 		artsapi.NewProvider(config.Config.Artists, 1),
-		subsapi.NewProvider(config.Config.Subscriptions, 1),
-	)
+		subsapi.NewProvider(config.Config.Subscriptions, 1))
 }

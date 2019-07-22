@@ -24,8 +24,7 @@ func TestNotifierSteps_Artist(t *testing.T) {
 		_, _ = fmt.Fprintf(w,
 			`[{"id":%d,"name":"%s"},{"id":%d,"name":"%s"}]`,
 			testutil.StoreIDQ, testutil.ArtistSkrillex,
-			testutil.StoreIDW, testutil.ArtistArchitects,
-		)
+			testutil.StoreIDW, testutil.ArtistArchitects)
 	})
 
 	// action

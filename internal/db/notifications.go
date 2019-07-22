@@ -1,8 +1,6 @@
 package db
 
-import (
-	"time"
-)
+import "time"
 
 type Notification struct {
 	ID        int       `gorm:"primary_key" sql:"AUTO_INCREMENT"`

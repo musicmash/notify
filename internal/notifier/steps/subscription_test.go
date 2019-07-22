@@ -27,8 +27,7 @@ func TestNotifierSteps_Subscription(t *testing.T) {
 					 {"artist_id":%d,"user_name":"%s"}]`,
 			testutil.StoreIDQ, testutil.UserObjque,
 			testutil.StoreIDW, testutil.UserObjque,
-			testutil.StoreIDW, testutil.UserBot,
-		)
+			testutil.StoreIDW, testutil.UserBot)
 	})
 
 	// action

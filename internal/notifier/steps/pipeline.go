@@ -32,7 +32,7 @@ func NewPipeline(mashClient *mashapi.Provider, artsClient *artsapi.Provider, sub
 
 func (p *Pipeline) Do(period time.Time) ([]*Item, error) {
 	// items will be inited after first (fetch) step
-	items := make([]*Item, 0)
+	items := []*Item{}
 	var err error
 	for _, step := range p.steps {
 		items, err = step.Do(period, items)
