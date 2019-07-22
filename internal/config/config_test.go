@@ -31,7 +31,7 @@ sentry:
 
 stores:
   itunes:
-    url:  "https://api.music.apple.com"
+    release_url: "https://itunes.apple.com/us/album/%s"
     name: "Apple Music"
     meta:
       region: "us"
@@ -59,8 +59,8 @@ subscriptions: "http://subscriptions"
 	assert.True(t, Config.Sentry.Enabled)
 	assert.Equal(t, "https://xxxxx:yyyyy@sentry.io/123456", Config.Sentry.Key)
 
-	assert.Equal(t, "https://api.music.apple.com", Config.Stores["itunes"].URL)
 	assert.Len(t, Config.Stores["itunes"].Meta, 1)
+	assert.Equal(t, "https://itunes.apple.com/us/album/%s", Config.Stores["itunes"].ReleaseURL)
 	assert.Equal(t, "us", Config.Stores["itunes"].Meta["region"])
 	assert.Equal(t, "Apple Music", Config.Stores["itunes"].Name)
 
