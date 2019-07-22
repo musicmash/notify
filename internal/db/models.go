@@ -21,16 +21,7 @@ func CreateAll(db *gorm.DB) error {
 		return err
 	}
 
-	fkeys := map[interface{}][][2]string{
-
-		Chat{}: {
-			{"user_name", "users(name)"},
-		},
-		Notification{}: {
-			{"user_name", "users(name)"},
-			{"release_id", "releases(id)"},
-		},
-	}
+	fkeys := map[interface{}][][2]string{}
 
 	for model, foreignKey := range fkeys {
 		for _, fk := range foreignKey {
@@ -41,22 +32,10 @@ func CreateAll(db *gorm.DB) error {
 		}
 	}
 
-	//if err := db.Debug().Model(&Subscription{}).AddUniqueIndex(
-	//	"idx_user_id_artist_name",
-	//	"user_id", "artist_name").Error; err != nil {
-	//	return err
-	//}
-	//
-	//if err := db.Debug().Model(&Release{}).AddIndex(
-	//	"idx_store_id", "store_id").Error; err != nil {
-	//	return err
-	//}
-	//
-	//if err := db.Debug().Model(&Store{}).AddIndex(
-	//	"idx_store_type_release_id",
-	//	"store_type", "release_id").Error; err != nil {
-	//	return err
-	//}
-
+	if err := db.Debug().Model(&Chat{}).AddUniqueIndex(
+		"ids_chat_id_user_name",
+		"id", "user_name").Error; err != nil {
+		return err
+	}
 	return nil
 }
