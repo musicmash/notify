@@ -16,7 +16,7 @@ t tests: install
 	go test -v ./internal/...
 
 add-ssh-key:
-	openssl aes-256-cbc -K $(encrypted_a4311917bb34_key) -iv $(encrypted_a4311917bb34_iv) -in travis_key.enc -out /tmp/travis_key -d
+	openssl aes-256-cbc -K $(encrypted_cd13e0597330_key) -iv $(encrypted_cd13e0597330_iv) -in travis_key.enc -out /tmp/travis_key -d
 	chmod 600 /tmp/travis_key
 	ssh-add /tmp/travis_key
 
