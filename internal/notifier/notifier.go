@@ -39,7 +39,7 @@ func (n *Notifier) Notify(period time.Time) error {
 	for _, item := range items {
 		for _, chat := range item.Chats {
 			for _, release := range item.Releases {
-				// TODO (m.kalinin): do not nofify if user already recieved an notification
+				// TODO (m.kalinin): do not nofify if user already received an notification
 				if err := notify(chat.ID, item.ArtistName, release); err != nil {
 					log.Error(err)
 				}
