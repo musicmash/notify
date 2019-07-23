@@ -33,7 +33,7 @@ func CreateAll(db *gorm.DB) error {
 	}
 
 	if err := db.Debug().Model(&Chat{}).AddUniqueIndex(
-		"ids_chat_id_user_name",
+		"idx_chat_id_user_name",
 		"id", "user_name").Error; err != nil {
 		return err
 	}
