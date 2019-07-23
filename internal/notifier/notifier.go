@@ -50,11 +50,14 @@ func (n *Notifier) Notify(period time.Time) error {
 	for _, item := range items {
 		for _, chat := range item.Chats {
 			for _, release := range item.Releases {
-				if _, err := db.DbMgr.IsUserNotified(chat.UserName, release.ID); err != nil {
-					if !gorm.IsRecordNotFoundError(err) {
-						log.Debugln(fmt.Sprintf("user '%s' already notified about '%d'", chat.UserName, release.ID))
-						continue
-					}
+				if _, err := db.DbMgr.IsUserNotified(chat.UserName, release.ID); err == nil {
+					log.Debugln(fmt.Sprintf("user '%s' already notified about '%d'", chat.UserName, release.ID))
+					continue
+				}
+
+				if !gorm.IsRecordNotFoundError(err) {
+					log.Error(err)
+					continue
 				}
 
 				if err := notify(chat.ID, item.ArtistName, release); err != nil {
