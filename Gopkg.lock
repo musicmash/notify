@@ -81,7 +81,7 @@
     "pkg/api/releases",
   ]
   pruneopts = "UT"
-  revision = "46aae936c907eb931af9c6aaf70abc3ac47a6eee"
+  revision = "0dab06165265b13751e31fbd4babb70f48afcebf"
 
 [[projects]]
   branch = "master"
