@@ -33,6 +33,14 @@ func notify(chatID int64, artistName string, release *releases.Release) error {
 	return nil
 }
 
+func markReleaseAsDeliveredTo(userName string, releaseID uint64) error {
+	return db.DbMgr.CreateNotification(&db.Notification{
+		Date:      time.Now().UTC(),
+		UserName:  userName,
+		ReleaseID: releaseID,
+	})
+}
+
 func (n *Notifier) Notify(period time.Time) error {
 	items, err := n.pipe.Do(period)
 	if err != nil {
@@ -52,6 +60,8 @@ func (n *Notifier) Notify(period time.Time) error {
 				if err := notify(chat.ID, item.ArtistName, release); err != nil {
 					log.Error(err)
 				}
+
+				_ = markReleaseAsDeliveredTo(chat.UserName, release.ID)
 			}
 		}
 	}
