@@ -59,6 +59,7 @@ func (n *Notifier) Notify(period time.Time) error {
 
 				if err := notify(chat.ID, item.ArtistName, release); err != nil {
 					log.Error(err)
+					continue
 				}
 
 				_ = markReleaseAsDeliveredTo(chat.UserName, release.ID)
