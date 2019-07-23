@@ -1,11 +1,14 @@
 package notifier
 
 import (
+	"fmt"
 	"time"
 
+	"github.com/jinzhu/gorm"
 	artsapi "github.com/musicmash/artists/pkg/api"
 	mashapi "github.com/musicmash/musicmash/pkg/api"
 	"github.com/musicmash/musicmash/pkg/api/releases"
+	"github.com/musicmash/notify/internal/db"
 	"github.com/musicmash/notify/internal/log"
 	"github.com/musicmash/notify/internal/notifier/steps"
 	"github.com/musicmash/notify/internal/notifier/telegram"
@@ -39,7 +42,13 @@ func (n *Notifier) Notify(period time.Time) error {
 	for _, item := range items {
 		for _, chat := range item.Chats {
 			for _, release := range item.Releases {
-				// TODO (m.kalinin): do not nofify if user already received an notification
+				if _, err := db.DbMgr.IsUserNotified(chat.UserName, release.ID); err != nil {
+					if gorm.IsRecordNotFoundError(err) {
+						log.Debugln(fmt.Sprintf("user '%s' already notified about '%d'", chat.UserName, release.ID))
+						continue
+					}
+				}
+
 				if err := notify(chat.ID, item.ArtistName, release); err != nil {
 					log.Error(err)
 				}
