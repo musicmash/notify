@@ -6,6 +6,7 @@ import (
 	artsapi "github.com/musicmash/artists/pkg/api"
 	mashapi "github.com/musicmash/musicmash/pkg/api"
 	"github.com/musicmash/musicmash/pkg/api/releases"
+	"github.com/musicmash/notify/internal/db"
 	"github.com/musicmash/notify/internal/log"
 	"github.com/musicmash/notify/internal/notifier/steps"
 	"github.com/musicmash/notify/internal/notifier/telegram"
@@ -30,6 +31,14 @@ func notify(chatID int64, artistName string, release *releases.Release) error {
 	return nil
 }
 
+func markReleaseAsDeliveredTo(userName string, releaseID uint64) error {
+	return db.DbMgr.CreateNotification(&db.Notification{
+		Date:      time.Now().UTC(),
+		UserName:  userName,
+		ReleaseID: releaseID,
+	})
+}
+
 func (n *Notifier) Notify(period time.Time) error {
 	items, err := n.pipe.Do(period)
 	if err != nil {
@@ -39,8 +48,12 @@ func (n *Notifier) Notify(period time.Time) error {
 	for _, item := range items {
 		for _, chat := range item.Chats {
 			for _, release := range item.Releases {
-				// TODO (m.kalinin): do not nofify if user already received an notification
 				if err := notify(chat.ID, item.ArtistName, release); err != nil {
+					log.Error(err)
+					continue
+				}
+
+				if err := markReleaseAsDeliveredTo(chat.UserName, release.ID); err != nil {
 					log.Error(err)
 				}
 			}

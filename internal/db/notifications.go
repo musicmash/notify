@@ -12,6 +12,7 @@ type Notification struct {
 type NotificationMgr interface {
 	CreateNotification(notification *Notification) error
 	GetNotificationsForUser(userName string) ([]*Notification, error)
+	FindUsersThatReceivedNotification(releaseID uint64, userNames []string) ([]string, error)
 }
 
 func (mgr *AppDatabaseMgr) GetNotificationsForUser(userName string) ([]*Notification, error) {
@@ -24,4 +25,13 @@ func (mgr *AppDatabaseMgr) GetNotificationsForUser(userName string) ([]*Notifica
 
 func (mgr *AppDatabaseMgr) CreateNotification(notification *Notification) error {
 	return mgr.db.Create(&notification).Error
+}
+
+func (mgr *AppDatabaseMgr) FindUsersThatReceivedNotification(releaseID uint64, userNames []string) ([]string, error) {
+	users := []string{}
+	const query = "select user_name from notifications where release_id = ? and user_name in (?)"
+	if err := mgr.db.Raw(query, releaseID, userNames).Pluck("user_name", &users).Error; err != nil {
+		return nil, err
+	}
+	return users, nil
 }

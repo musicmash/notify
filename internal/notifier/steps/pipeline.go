@@ -21,6 +21,9 @@ func NewPipeline(mashClient *mashapi.Provider, artsClient *artsapi.Provider, sub
 			// find subscribers
 			NewFindSubscribersStep(subsClient),
 
+			// exclude subscribers that already received notifications
+			NewExcludeSubscribersStep(),
+
 			// find subscribers chats
 			NewFindSubscriberChatsStep(),
 
