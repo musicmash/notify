@@ -3,10 +3,10 @@ package db
 import "time"
 
 type Notification struct {
-	ID        int       `gorm:"primary_key" sql:"AUTO_INCREMENT"`
-	Date      time.Time `gorm:"unique_index:idx_notify_date_user_release"`
-	UserName  string    `gorm:"unique_index:idx_notify_date_user_release"`
-	ReleaseID uint64    `gorm:"unique_index:idx_notify_date_user_release"`
+	ID        int `gorm:"primary_key" sql:"AUTO_INCREMENT"`
+	Date      time.Time
+	UserName  string `gorm:"unique_index:idx_user_name_release_id"`
+	ReleaseID uint64 `gorm:"unique_index:idx_user_name_release_id"`
 }
 
 type NotificationMgr interface {

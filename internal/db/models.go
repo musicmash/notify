@@ -37,5 +37,10 @@ func CreateAll(db *gorm.DB) error {
 		"id", "user_name").Error; err != nil {
 		return err
 	}
+	if err := db.Debug().Model(&Notification{}).AddUniqueIndex(
+		"idx_user_name_release_id",
+		"user_name", "release_id").Error; err != nil {
+		return err
+	}
 	return nil
 }
