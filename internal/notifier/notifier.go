@@ -51,7 +51,7 @@ func (n *Notifier) Notify(period time.Time) error {
 		for _, chat := range item.Chats {
 			for _, release := range item.Releases {
 				if _, err := db.DbMgr.IsUserNotified(chat.UserName, release.ID); err != nil {
-					if gorm.IsRecordNotFoundError(err) {
+					if !gorm.IsRecordNotFoundError(err) {
 						log.Debugln(fmt.Sprintf("user '%s' already notified about '%d'", chat.UserName, release.ID))
 						continue
 					}
