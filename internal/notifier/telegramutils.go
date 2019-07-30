@@ -24,7 +24,7 @@ func makeText(artistName string, release *releases.Release) string {
 func makeButtons(release *releases.Release) *[][]tgbotapi.InlineKeyboardButton {
 	buttons := [][]tgbotapi.InlineKeyboardButton{}
 	storeDetails := config.Config.Stores[release.StoreName]
-	buttonLabel := fmt.Sprintf("Open in %s", storeDetails.Name)
+	buttonLabel := fmt.Sprintf("Listen on %s", storeDetails.Name)
 	url := fmt.Sprintf(config.Config.Stores[release.StoreName].ReleaseURL, release.StoreID)
 	buttons = append(buttons, tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonURL(buttonLabel, url)))
 	return &buttons
