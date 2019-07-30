@@ -24,7 +24,7 @@ func TestTelegramUtils_MakeText(t *testing.T) {
 	text := makeText(testutil.ArtistArchitects, &release)
 
 	// assert
-	assert.Equal(t, "New album released \n*Holly Hell*\nby Architects\n [‌‌](http://pic.jpeg)", text)
+	assert.Equal(t, "New album released \n*Holly Hell*\nby Architects [‌‌](http://pic.jpeg)", text)
 }
 
 func TestTelegramUtils_MakeButtons(t *testing.T) {
