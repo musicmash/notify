@@ -50,7 +50,7 @@ func TestTelegramUtils_MakeButtons(t *testing.T) {
 
 	// assert
 	assert.Len(t, *buttons, 1)
-	const wantText = "Open in " + testutil.StoreApple
+	const wantText = "Listen on " + testutil.StoreApple
 	assert.Equal(t, wantText, (*buttons)[0][0].Text)
 	const wantURL = "https://itunes.apple.com/us/album/" + testutil.StoreIDA
 	assert.NotNil(t, (*buttons)[0][0].URL)
