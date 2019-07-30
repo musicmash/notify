@@ -14,11 +14,11 @@ func makeText(artistName string, release *releases.Release) string {
 	state := "released"
 	if release.Released.After(time.Now().UTC()) {
 		state = "announced"
-		releaseDate = fmt.Sprintf("\nRelease date: %s", release.Released.Format(time.RFC850))
+		releaseDate = fmt.Sprintf("Release date: %s", release.Released.Format(time.RFC850))
 	}
 
 	poster := fmt.Sprintf("[‌‌](%s)", release.Poster)
-	return fmt.Sprintf("New album %s \n*%s*\n%s%s %s", state, artistName, release.Title, releaseDate, poster)
+	return fmt.Sprintf("New album %s \n*%s*\nby %s\n%s %s", state, release.Title, artistName, releaseDate, poster)
 }
 
 func makeButtons(release *releases.Release) *[][]tgbotapi.InlineKeyboardButton {
