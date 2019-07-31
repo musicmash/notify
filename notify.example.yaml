@@ -22,6 +22,7 @@ sentry:
 stores:
   itunes:
     url:  "https://api.music.apple.com"
+    release_url: "https://music.apple.com/us/album/%s?l=en&app=music"
     name: "Apple Music"
     meta:
       region: "us"
