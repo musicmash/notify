@@ -92,7 +92,7 @@
     "pkg/api/subscriptions",
   ]
   pruneopts = "UT"
-  revision = "cc1286aaf861afc8a7167b48f78fddd8309ece38"
+  revision = "aaa6a45658e6555b00f03f8056ed9a9a2827b84c"
 
 [[projects]]
   digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
