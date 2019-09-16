@@ -7,7 +7,7 @@ type Notification struct {
 	Date      time.Time
 	UserName  string `gorm:"unique_index:idx_user_name_release_id_is_coming"`
 	ReleaseID uint64 `gorm:"unique_index:idx_user_name_release_id_is_coming"`
-	IsComing  bool   `gorm:"unique_index:idx_user_name_release_id_is_coming"`
+	IsComing  bool   `gorm:"unique_index:idx_user_name_release_id_is_coming" gorm:"default:'false'"`
 }
 
 type NotificationMgr interface {
