@@ -5,14 +5,15 @@ import "time"
 type Notification struct {
 	ID        int `gorm:"primary_key" sql:"AUTO_INCREMENT"`
 	Date      time.Time
-	UserName  string `gorm:"unique_index:idx_user_name_release_id"`
-	ReleaseID uint64 `gorm:"unique_index:idx_user_name_release_id"`
+	UserName  string `gorm:"unique_index:idx_user_name_release_id_is_coming"`
+	ReleaseID uint64 `gorm:"unique_index:idx_user_name_release_id_is_coming"`
+	IsComing  bool   `gorm:"unique_index:idx_user_name_release_id_is_coming"`
 }
 
 type NotificationMgr interface {
 	CreateNotification(notification *Notification) error
 	GetNotificationsForUser(userName string) ([]*Notification, error)
-	IsUserNotified(userName string, releaseID uint64) (*Notification, error)
+	IsUserNotified(userName string, releaseID uint64, isComing bool) (*Notification, error)
 }
 
 func (mgr *AppDatabaseMgr) GetNotificationsForUser(userName string) ([]*Notification, error) {
@@ -27,9 +28,10 @@ func (mgr *AppDatabaseMgr) CreateNotification(notification *Notification) error 
 	return mgr.db.Create(&notification).Error
 }
 
-func (mgr *AppDatabaseMgr) IsUserNotified(userName string, releaseID uint64) (*Notification, error) {
+func (mgr *AppDatabaseMgr) IsUserNotified(userName string, releaseID uint64, isComing bool) (*Notification, error) {
 	notification := Notification{}
-	err := mgr.db.Where("user_name = ? and release_id = ?", userName, releaseID).First(&notification).Error
+	const query = "user_name = ? and release_id = ? and is_coming = ?"
+	err := mgr.db.Where(query, userName, releaseID, isComing).First(&notification).Error
 	if err != nil {
 		return nil, err
 	}

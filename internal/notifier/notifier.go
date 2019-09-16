@@ -41,6 +41,11 @@ func markReleaseAsDeliveredTo(userName string, releaseID uint64) error {
 	})
 }
 
+func isComing(release *releases.Release) bool {
+	// if release day tomorrow or later, than that means coming release is here
+	return release.Released.After(time.Now().UTC().Truncate(24 * time.Hour))
+}
+
 func (n *Notifier) Notify(period time.Time) error {
 	items, err := n.pipe.Do(period)
 	if err != nil {
@@ -50,7 +55,7 @@ func (n *Notifier) Notify(period time.Time) error {
 	for _, item := range items {
 		for _, chat := range item.Chats {
 			for _, release := range item.Releases {
-				_, err := db.DbMgr.IsUserNotified(chat.UserName, release.ID)
+				_, err := db.DbMgr.IsUserNotified(chat.UserName, release.ID, isComing(release))
 				switch err {
 				case nil:
 					log.Debugln(fmt.Sprintf("user '%s' already notified about '%d'", chat.UserName, release.ID))
