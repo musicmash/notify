@@ -33,11 +33,12 @@ func notify(chatID int64, artistName string, release *releases.Release) error {
 	return nil
 }
 
-func markReleaseAsDeliveredTo(userName string, releaseID uint64) error {
+func markReleaseAsDeliveredTo(userName string, releaseID uint64, isComing bool) error {
 	return db.DbMgr.CreateNotification(&db.Notification{
 		Date:      time.Now().UTC(),
 		UserName:  userName,
 		ReleaseID: releaseID,
+		IsComing:  isComing,
 	})
 }
 
@@ -55,7 +56,8 @@ func (n *Notifier) Notify(period time.Time) error {
 	for _, item := range items {
 		for _, chat := range item.Chats {
 			for _, release := range item.Releases {
-				_, err := db.DbMgr.IsUserNotified(chat.UserName, release.ID, isComing(release))
+				isComing := isComing(release)
+				_, err := db.DbMgr.IsUserNotified(chat.UserName, release.ID, isComing)
 				switch err {
 				case nil:
 					log.Debugln(fmt.Sprintf("user '%s' already notified about '%d'", chat.UserName, release.ID))
@@ -72,7 +74,7 @@ func (n *Notifier) Notify(period time.Time) error {
 					continue
 				}
 
-				_ = markReleaseAsDeliveredTo(chat.UserName, release.ID)
+				_ = markReleaseAsDeliveredTo(chat.UserName, release.ID, isComing)
 			}
 		}
 	}
