@@ -19,7 +19,7 @@ uwsgi = "^2.0.19"
 pylint = "^2.3"
 flake8 = "^3.7"
 isort = "^5.1"
-pylint-django = "^2.0"
+pylint-django = "^2.1"
 black = "^19.10b0"
 ipython = "^7.9.0"
 
