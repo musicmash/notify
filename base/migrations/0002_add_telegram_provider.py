@@ -4,13 +4,13 @@ from django.db import migrations
 
 
 def forwards(apps, schema_editor):
-    Provider = apps.get_model('base', 'Provider')
+    Provider = apps.get_model("base", "Provider")
 
     Provider.objects.create(name="telegram")
 
 
 def backwards(apps, schema_editor):
-    Provider = apps.get_model('base', 'Provider')
+    Provider = apps.get_model("base", "Provider")
 
     Provider.objects.filter(name="telegram").delete()
 
@@ -18,7 +18,7 @@ def backwards(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('base', '0001_initial'),
+        ("base", "0001_initial"),
     ]
 
     operations = [
