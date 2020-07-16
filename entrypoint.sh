@@ -4,7 +4,6 @@
 # set -o nounset
 
 python /app/manage.py migrate --noinput
-python /app/manage.py collectstatic --noinput
 
 uwsgi --ini uwsgi.ini
 

@@ -1,0 +1,4 @@
+New {{ release_type }} released
+*{{ explicit }}{{ title }}*
+by {{ artist_name }}
+[{{ invisible_text }}]({{ poster }})
