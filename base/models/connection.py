@@ -15,7 +15,11 @@ class Connection(BaseModel):
     settings = models.CharField(max_length=255)
 
     class Meta:
-        unique_together = [["user_name", "provider", "settings"]]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user_name", "provider", "settings"], name="Unique connection"
+            )
+        ]
         db_table = "connections"
         verbose_name = "Connection"
         verbose_name_plural = "Connections"
