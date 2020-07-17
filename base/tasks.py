@@ -1,9 +1,11 @@
-from typing import List, Optional
+from typing import List
 
 from celery import group
 
-from base.models import Connection
+from base.models import AsapSchedule
+from base.models.connection import Connection
 from base.serializers import NotificationSerializer
+from base.services import TELEGRAM
 from base.services.telegram.service import TelegramService
 from notify.celery import app
 
@@ -20,16 +22,17 @@ def add_releases(data: List[dict]):
         user_name = user_data["user_name"]
         releases = user_data["releases"]
 
-        connection: Optional[Connection] = Connection.objects.filter(
-            user_name=user_name, provider_name="telegram"
-        ).first()
+        connection = (
+            AsapSchedule.objects.select_related("connection")
+            .filter(connection__user_name=user_name)
+            .count()
+        )
 
         if not connection:
             continue
 
         job = group(
-            telegram_release.s(chat_id=connection.settings, user_name=user_name, release=release)
-            for release in releases
+            send_user_release.s(user_name=user_name, release=release) for release in releases
         )
 
         jobs.append(job)
@@ -38,5 +41,25 @@ def add_releases(data: List[dict]):
 
 
 @app.task(max_retries=None, retry_backoff=True)
-def telegram_release(chat_id: int, user_name: str, release: dict):
-    TelegramService().send_notication(chat_id=chat_id, user_name=user_name, release=release)
+def send_user_release(user_name: str, release: dict):
+    user_connections = Connection.objects.filter(user_name=user_name).all()
+
+    group_task = group(
+        send_release.s(connection_id=connection.id, release=release)
+        for connection in user_connections
+    )
+
+    group_task()
+
+
+@app.task(max_retries=None, retry_backoff=True)
+def send_release(connection_id: int, release: dict):
+    connection: Connection = Connection.objects.get(pk=connection_id)
+
+    services = {
+        TELEGRAM: TelegramService,
+    }
+
+    service = services[connection.provider_id]()
+
+    service.send_release(connection=connection, release=release)

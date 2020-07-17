@@ -4,6 +4,8 @@ from typing import Optional
 import telegram
 from django.template.loader import render_to_string
 
+from base.models.connection import Connection
+
 
 class TelegramService:
     def __init__(self, telegram_token: Optional[str] = None):
@@ -11,7 +13,7 @@ class TelegramService:
 
         self.bot = telegram.Bot(token)
 
-    def send_notication(self, chat_id: int, user_name: str, release: dict):
+    def send_release(self, connection: Connection, release: dict):
         release_url = f"https://itunes.apple.com/us/{release['type']}/{release['itunes_id']}"
 
         keyboard = [[telegram.InlineKeyboardButton("Listen on Apple Music", url=release_url)]]
@@ -31,7 +33,7 @@ class TelegramService:
         )
 
         self.bot.send_message(
-            chat_id=chat_id,
+            chat_id=connection.settings,
             text=text,
             parse_mode=telegram.ParseMode.MARKDOWN_V2,
             reply_markup=telegram.InlineKeyboardMarkup(keyboard),
