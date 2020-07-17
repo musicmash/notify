@@ -15,6 +15,7 @@ class Connection(BaseModel):
     settings = models.CharField(max_length=255)
 
     class Meta:
+        unique_together = [["user_name", "provider", "settings"]]
         db_table = "connections"
         verbose_name = "Connection"
         verbose_name_plural = "Connections"
