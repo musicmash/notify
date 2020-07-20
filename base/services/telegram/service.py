@@ -1,4 +1,5 @@
 import os
+from html import unescape
 from typing import Optional
 
 import telegram
@@ -25,8 +26,8 @@ class TelegramService:
             {
                 "invisible_text": "\u200c\u200c",
                 "poster": release["poster"],
-                "title": release["title"],
-                "artist_name": release["artist_name"],
+                "title": unescape(release["title"]),
+                "artist_name": unescape(release["artist_name"]),
                 "release_type": release["type"],
                 "explicit": explicit,
             },
