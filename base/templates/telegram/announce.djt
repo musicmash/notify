@@ -1,4 +1,4 @@
 New {{ release_type }} announced 🔥
-*{{ explicit }}{{ title }}*
-by {{ artist_name }} [{{ invisible_text }}]({{ poster }})
+*{{ explicit }}{{ title|safe }}*
+by {{ artist_name|safe }} [{{ invisible_text }}]({{ poster }})
 🗓 {{ release_date|date:"l, d-M-y" }}
