@@ -17,4 +17,4 @@ from django.urls import path
 
 from base.views import new_releases
 
-urlpatterns = [path("releases", new_releases, name="releases")]
+urlpatterns = [path("v1/releases", new_releases, name="releases")]
