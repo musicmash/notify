@@ -1,7 +1,5 @@
-from django.db import IntegrityError
 from rest_framework import status
 from rest_framework.decorators import api_view
-from rest_framework.exceptions import ValidationError
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -37,12 +35,7 @@ class ConnectionsViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         request.data["user_name"] = request.user.name
 
-        try:
-            response = super().create(request, *args, **kwargs)
-        except IntegrityError:
-            raise ValidationError("Connection already exists")
-
-        return response
+        return super().create(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
         request.data["user_name"] = request.user.name
