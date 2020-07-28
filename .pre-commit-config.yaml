@@ -15,7 +15,7 @@ repos:
         args: ['--in-place', '--remove-all-unused-imports', '--remove-unused-variable']
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.7.0
+    rev: v2.7.2
     hooks:
       - id: pyupgrade
         args: ['--py36-plus']
@@ -26,7 +26,7 @@ repos:
       - id: seed-isort-config
 
   - repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.0.7
+    rev: v5.2.0
     hooks:
       - id: isort
         files: \.py$

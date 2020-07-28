@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
+from base.models.connection import Connection
+
 TYPES = [
     ("album", "album"),
     ("single", "single"),
@@ -33,3 +35,12 @@ class ReleaseSerializer(serializers.Serializer):
 class NotificationSerializer(serializers.Serializer):
     user_name = serializers.CharField()
     releases = ReleaseSerializer(many=True)
+
+
+class ConnectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Connection
+        fields = ["id", "user_name", "provider", "settings"]
+        extra_kwargs = {
+            "user_name": {"write_only": True},
+        }
