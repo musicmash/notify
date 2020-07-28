@@ -15,6 +15,15 @@ Including another URLconf
 """
 from django.urls import path
 
-from base.views import new_releases
+from base.views import ConnectionsViewSet, new_releases
 
-urlpatterns = [path("releases", new_releases, name="releases")]
+connection_list = ConnectionsViewSet.as_view({"get": "list", "post": "create"})
+connection_detail = ConnectionsViewSet.as_view(
+    {"get": "retrieve", "put": "update", "patch": "partial_update", "delete": "destroy"}
+)
+
+urlpatterns = [
+    path("releases", new_releases, name="releases"),
+    path("connections", connection_list, name="connection-list"),
+    path("connections/<int:pk>", connection_detail, name="connection-detail"),
+]
