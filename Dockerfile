@@ -5,7 +5,7 @@ ARG ENV="production"
 ENV ENV=${ENV} \
     DEBIAN_FRONTEND=noninteractive \
     # poetry:
-    POETRY_VERSION=1.0.9 \
+    POETRY_VERSION=1.0.10 \
     POETRY_VIRTUALENVS_CREATE=false \
     POETRY_CACHE_DIR='/var/cache/pypoetry' \
     # pip:
@@ -50,13 +50,15 @@ COPY . /app
 
 FROM base
 
-COPY --from=builder /env /env
-COPY --from=builder /app /app
 # Setting up proper permissions:
-RUN groupadd -r web && useradd -d /app -r -g web web \
-    && chown web:web -R /app
+RUN groupadd -r web && useradd -d /app -r -g web web
+
+COPY --from=builder /env /env
+COPY --from=builder --chown=web:web  /app /app
 
 # Running as non-root user:
 USER web
+
+WORKDIR /app
 
 CMD ["sh", "entrypoint.sh"]
