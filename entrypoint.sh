@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 
-# set -o errexit
-# set -o nounset
+set -o errexit
+set -o nounset
 
-python /app/manage.py migrate --noinput
+/env/bin/python /app/manage.py migrate --noinput
 
-uwsgi --ini uwsgi.ini
+/env/bin/uwsgi --ini uwsgi.ini
 
 # /usr/local/bin/gunicorn notify.wsgi \
 #   --workers=4 `# Sync worker settings` \

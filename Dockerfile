@@ -1,4 +1,4 @@
-FROM python:3.8-slim as development_build
+FROM python:3.8-slim as base
 
 ARG ENV="production"
 
@@ -13,6 +13,7 @@ ENV ENV=${ENV} \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100
 
+FROM base as builder
 # System deps
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
@@ -33,6 +34,8 @@ COPY ./pyproject.toml ./poetry.lock /app/
 
 # Project initialization:
 RUN echo "$ENV" \
+    && python -m venv /env \
+    && . /env/bin/activate \
     && poetry --version \
     && poetry install \
     $(if [ "$ENV" = 'production' ]; then echo '--no-dev'; fi) \
@@ -42,13 +45,18 @@ RUN echo "$ENV" \
     # Cleaning poetry installation's cache for production:
     && if [ "$ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
 
+COPY . /app
+
+
+FROM base
+
+COPY --from=builder /env /env
+COPY --from=builder /app /app
 # Setting up proper permissions:
 RUN groupadd -r web && useradd -d /app -r -g web web \
     && chown web:web -R /app
 
 # Running as non-root user:
 USER web
-
-COPY . /app
 
 CMD ["sh", "entrypoint.sh"]
