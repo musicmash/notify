@@ -29,6 +29,7 @@ jobs:
             -t $IMAGE_NAME-builder-stage \
             .
           docker build \
+            --cache-from $IMAGE_NAME-builder-stage:latest \
             --cache-from $IMAGE_NAME:latest \
             --tag $IMAGE_NAME:latest \
             --tag docker.pkg.github.com/$IMAGE_NAME/notify:latest \
