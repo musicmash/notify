@@ -1,4 +1,4 @@
-FROM python:3.8-slim as base
+FROM python:3.8-slim as builder
 
 ARG ENV="production"
 
@@ -13,7 +13,6 @@ ENV ENV=${ENV} \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100
 
-FROM base as builder
 # System deps
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
@@ -48,7 +47,7 @@ RUN echo "$ENV" \
 COPY . /app
 
 
-FROM base
+FROM python:3.8-slim
 
 # Setting up proper permissions:
 RUN groupadd -r web && useradd -d /app -r -g web web
