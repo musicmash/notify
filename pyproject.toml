@@ -23,7 +23,7 @@ flake8 = "^3.7"
 isort = "^5.3"
 pylint-django = "^2.1"
 black = "^19.10b0"
-ipython = "^7.9.0"
+ipython = "^7.17.0"
 mypy = "^0.782"
 
 [tool.black]
