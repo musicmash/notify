@@ -10,7 +10,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterUniqueTogether(name="connection", unique_together=set(),),
+        migrations.AlterUniqueTogether(
+            name="connection",
+            unique_together=set(),
+        ),
         migrations.AddConstraint(
             model_name="connection",
             constraint=models.UniqueConstraint(
