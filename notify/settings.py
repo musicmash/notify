@@ -88,7 +88,7 @@ DJANGO_TELEGRAMBOT = {
     # otherwise you may use 'POLLING'
     # NB: if use polling you must provide to run
     # a management command that starts a worker
-    "WEBHOOK_SITE": "https://musicmash.me",
+    "WEBHOOK_SITE": os.getenv("TELEGRAM_WEBHOOK_BASE_URL"),
     "WEBHOOK_PREFIX": f"/v1/{os.getenv('SECURITY_URL_PREFIX')}/telegram/web-hook",
     # (Optional[str]) # If this value is specified,
     # a prefix is added to webhook url
