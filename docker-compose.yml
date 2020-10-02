@@ -38,7 +38,7 @@ services:
       - ./redis-data:/data
 
   db:
-    image: postgres:latest
+    image: postgres:12
     restart: always
     ports:
       - "${POSTGRES_PORT}:5432"

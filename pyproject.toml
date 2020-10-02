@@ -16,6 +16,8 @@ celery = {version = "^4.4.7", extras = ["redis"]}
 uwsgi = "^2.0.19"
 python-telegram-bot = "^12.8"
 python-dateutil = "^2.8.1"
+django-telegrambot = {git = "https://github.com/telebotter/django-telegrambot.git"}
+django-redis = "^4.12.1"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.3"

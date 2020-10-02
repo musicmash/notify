@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import include, path, re_path
 
 from base.views import ConnectionsViewSet, new_releases
 
@@ -26,4 +26,5 @@ urlpatterns = [
     path("v1/releases", new_releases, name="releases"),
     path("v1/connections", connection_list, name="connection-list"),
     path("v1/connections/<int:pk>", connection_detail, name="connection-detail"),
+    re_path(r"^", include("django_telegrambot.urls")),
 ]

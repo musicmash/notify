@@ -217,6 +217,36 @@ argon2 = ["argon2-cffi (>=16.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-redis"
+version = "4.12.1"
+description = "Full featured redis cache backend for Django."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+Django = ">=2.2"
+redis = ">=3.0.0"
+
+[[package]]
+name = "django-telegrambot"
+version = "1.0.2"
+description = "A simple app to develop Telegram bot with Django"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = ">=1.8.18"
+python-telegram-bot = ">=6.0.1"
+
+[package.source]
+type = "git"
+url = "https://github.com/telebotter/django-telegrambot.git"
+reference = "master"
+resolved_reference = "76742ec4cff775bf4e31df481face7662f5f412f"
+
+[[package]]
 name = "djangorestframework"
 version = "3.12.1"
 description = "Web APIs for Django, made easy."
@@ -748,7 +778,7 @@ testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "6f4f2aee56adfc76163f93c2c5e588df0396863bbd0ee8d792cf81e3b976faa3"
+content-hash = "73c37357dfa574a776a34d360d5c57b0045009dc5dc5d37a3af60a96b74909ff"
 
 [metadata.files]
 amqp = [
@@ -868,6 +898,11 @@ django = [
     {file = "Django-3.1.2-py3-none-any.whl", hash = "sha256:c93c28ccf1d094cbd00d860e83128a39e45d2c571d3b54361713aaaf9a94cac4"},
     {file = "Django-3.1.2.tar.gz", hash = "sha256:a2127ad0150ec6966655bedf15dbbff9697cc86d61653db2da1afa506c0b04cc"},
 ]
+django-redis = [
+    {file = "django-redis-4.12.1.tar.gz", hash = "sha256:306589c7021e6468b2656edc89f62b8ba67e8d5a1c8877e2688042263daa7a63"},
+    {file = "django_redis-4.12.1-py3-none-any.whl", hash = "sha256:1133b26b75baa3664164c3f44b9d5d133d1b8de45d94d79f38d1adc5b1d502e5"},
+]
+django-telegrambot = []
 djangorestframework = [
     {file = "djangorestframework-3.12.1-py3-none-any.whl", hash = "sha256:5c5071fcbad6dce16f566d492015c829ddb0df42965d488b878594aabc3aed21"},
     {file = "djangorestframework-3.12.1.tar.gz", hash = "sha256:d54452aedebb4b650254ca092f9f4f5df947cb1de6ab245d817b08b4f4156249"},
