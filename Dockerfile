@@ -5,7 +5,7 @@ ARG ENV="production"
 ENV ENV=${ENV} \
     DEBIAN_FRONTEND=noninteractive \
     # poetry:
-    POETRY_VERSION=1.0.10 \
+    POETRY_VERSION=1.1.0 \
     POETRY_VIRTUALENVS_CREATE=false \
     POETRY_CACHE_DIR='/var/cache/pypoetry' \
     # pip:
