@@ -89,7 +89,7 @@ DJANGO_TELEGRAMBOT = {
     # NB: if use polling you must provide to run
     # a management command that starts a worker
     "WEBHOOK_SITE": "https://musicmash.me",
-    "WEBHOOK_PREFIX": "/v1/c8f2a745-48f1-4529-85e0-e4329bbfd679/telegram/web-hook",
+    "WEBHOOK_PREFIX": f"/v1/{os.getenv('SECURITY_URL_PREFIX')}/telegram/web-hook",
     # (Optional[str]) # If this value is specified,
     # a prefix is added to webhook url
     # 'WEBHOOK_CERTIFICATE' : 'cert.pem', # If your site use self-signed
